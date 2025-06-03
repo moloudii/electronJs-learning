@@ -14,7 +14,7 @@ const createMainWindow = () => {
       sandbox: true, // Electron 36
     },
   });
-  win.loadFile("./index.html");
+  win.loadFile("./renderer/index.html");
 };
 // 📡 IPC Listener: get Feed request from renderer { electron 36 }
 ipcMain.handle("rss:load", async (event, url) => {
