@@ -20,6 +20,9 @@ const addRssItem = (item) => {
 
 // New Renderer (Window)
 document.getElementById("news-wrapper").addEventListener("click", (e) => {
-  e.preventDefault();
-  window.showFeed(e.target.closest("a").href);
+  const link = e.target.closest("a");
+  if (link) {
+    e.preventDefault();
+    window.showFeed(e.target.closest("a").href);
+  }
 });

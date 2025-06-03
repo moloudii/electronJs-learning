@@ -36,6 +36,11 @@ const showFeed = (event, url) => {
     height: 500,
     alwaysOnTop: true,
     parent: mainWindow,
+    webPreferences: {
+      sandbox: true,
+      nodeIntegration: false,
+      contextIsolation: true,
+    },
   });
   feedWindow.loadURL(url);
 };
