@@ -12,3 +12,8 @@ contextBridge.exposeInMainWorld("rssApi", {
     return await ipcRenderer.invoke("rss:load", url);
   },
 });
+// New Renderer (Window)
+const showFeed = (url) => {
+  ipcRenderer.send("show-feed", url);
+};
+contextBridge.exposeInMainWorld("showFeed", showFeed);

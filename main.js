@@ -3,9 +3,9 @@ const { app, BrowserWindow, ipcMain } = require("electron");
 const Parser = require("rss-parser");
 require("electron-reload")(__dirname);
 
-let win;
+let mainWindow;
 const createMainWindow = () => {
-  win = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     alwaysOnTop: true,
@@ -14,7 +14,7 @@ const createMainWindow = () => {
       sandbox: true, // Electron 36
     },
   });
-  win.loadFile("./renderer/index.html");
+  mainWindow.loadFile("./renderer/index.html");
 };
 // 📡 IPC Listener: get Feed request from renderer { electron 36 }
 ipcMain.handle("rss:load", async (event, url) => {
@@ -29,4 +29,14 @@ ipcMain.handle("rss:load", async (event, url) => {
 app.whenReady().then(() => {
   createMainWindow();
 });
-console.log("Hello world in ELECTRON");
+// New Renderer (Window)
+const showFeed = (event, url) => {
+  feedWindow = new BrowserWindow({
+    width: 700,
+    height: 500,
+    alwaysOnTop: true,
+    parent: mainWindow,
+  });
+  feedWindow.loadURL(url);
+};
+ipcMain.on("show-feed", showFeed);

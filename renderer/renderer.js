@@ -17,3 +17,9 @@ const addRssItem = (item) => {
   newsCard.querySelector("p").innerText = item.content ?? " ";
   newsWrapper.append(newsCard);
 };
+
+// New Renderer (Window)
+document.getElementById("news-wrapper").addEventListener("click", (e) => {
+  e.preventDefault();
+  window.showFeed(e.target.closest("a").href);
+});
