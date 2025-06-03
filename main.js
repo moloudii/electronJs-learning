@@ -45,3 +45,19 @@ const showFeed = (event, url) => {
   feedWindow.loadURL(url);
 };
 ipcMain.on("show-feed", showFeed);
+// New RSS Window (Window)
+const showRssUrlForm = (event) => {
+  rssWindow = new BrowserWindow({
+    width: 600,
+    height: 500,
+    alwaysOnTop: true,
+    parent: mainWindow,
+    webPreferences: {
+      sandbox: true,
+      nodeIntegration: false,
+      contextIsolation: true,
+    },
+  });
+  rssWindow.loadFile("./renderer/rssUrlForm.html");
+};
+ipcMain.on("show-rss-form", showRssUrlForm);

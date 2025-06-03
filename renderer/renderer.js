@@ -1,11 +1,13 @@
-const rssUrl = "https://www.asriran.com/fa/rss/allnews";
+// const rssUrl = "https://www.asriran.com/fa/rss/allnews";
+const urlFeeds = JSON.parse(localStorage.getItem("rssFeedUrls")) ?? [];
+urlFeeds.forEach((feed) => {
+  window.rssApi.loadRssFeed(feed.url).then((rssFeedData) => {
+    rssFeedData.items.forEach(addRssItem);
+  });
+});
+
 // window.loadRssFeed(rssUrl).then((response) => console.log(response));
 // Electron 36
-window.rssApi.loadRssFeed(rssUrl).then((rssFeedData) => {
-  console.log(rssFeedData);
-
-  rssFeedData.items.forEach(addRssItem);
-});
 
 const addRssItem = (item) => {
   const newsWrapper = document.getElementById("news-wrapper");
@@ -26,3 +28,7 @@ document.getElementById("news-wrapper").addEventListener("click", (e) => {
     window.showFeed(e.target.closest("a").href);
   }
 });
+// New RSS Window (Window)
+document
+  .querySelector("button")
+  .addEventListener("click", () => window.showRssForm());
