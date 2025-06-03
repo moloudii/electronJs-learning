@@ -1,7 +1,10 @@
 const path = require("path");
 const { app, BrowserWindow, ipcMain } = require("electron");
 const Parser = require("rss-parser");
-require("electron-reload")(__dirname);
+const isDev = !app.isPackaged;
+if (isDev) {
+  require("electron-reload")(__dirname);
+}
 
 let mainWindow;
 const createMainWindow = () => {
@@ -14,6 +17,9 @@ const createMainWindow = () => {
       sandbox: true, // Electron 36
     },
   });
+  if (!isDev) {
+    mainWindow.removeMenu();
+  }
   mainWindow.loadFile("./renderer/index.html");
 };
 // 📡 IPC Listener: get Feed request from renderer { electron 36 }

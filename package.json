@@ -4,16 +4,53 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron ."
+    "start": "electron .",
+    "dist": "electron-builder"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
     "electron": "^36.3.2",
-    "rss-parser": "^3.13.0"
+    "electron-builder": "^26.0.12"
   },
   "dependencies": {
-    "electron-reload": "^2.0.0-alpha.1"
+    "electron-reload": "^2.0.0-alpha.1",
+    "rss-parser": "^3.13.0"
+  },
+  "build": {
+    "appId": "news.reader",
+    "productName": "news-reader",
+    "icon": "sketch-label.png",
+    "mac": {
+      "target": "dmg",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": true,
+      "extendInfo": {
+        "NSAppleEventsUsageDescription": "Let me use Apple Events.",
+        "NSCameraUsageDescription": "Let me use the camera.",
+        "NSScreenCaptureDescription": "Let me take screenshots."
+      }
+    },
+    "dmg": {
+      "iconSize": 100,
+      "contents": [
+        {
+          "x": 255,
+          "y": 85,
+          "type": "file"
+        },
+        {
+          "x": 253,
+          "y": 325,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ],
+      "window": {
+        "width": 500,
+        "height": 500
+      }
+    }
   }
 }

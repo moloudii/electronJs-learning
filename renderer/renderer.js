@@ -1,9 +1,19 @@
 // const rssUrl = "https://www.asriran.com/fa/rss/allnews";
-const urlFeeds = JSON.parse(localStorage.getItem("rssFeedUrls")) ?? [];
-urlFeeds.forEach((feed) => {
-  window.rssApi.loadRssFeed(feed.url).then((rssFeedData) => {
-    rssFeedData.items.forEach(addRssItem);
+// https://www.irna.ir/rss
+
+// Auto Render
+const getRssFeedUrls = () => {
+  return JSON.parse(localStorage.getItem("rssFeedUrls")) ?? [];
+};
+
+const urlFeeds = getRssFeedUrls();
+const getRssFeed = (feed) => {
+  window.rssApi.loadRssFeed(feed?.url).then((rssFeedData) => {
+    rssFeedData?.items.forEach(addRssItem);
   });
+};
+urlFeeds.forEach((feed) => {
+  getRssFeed(feed);
 });
 
 // window.loadRssFeed(rssUrl).then((response) => console.log(response));
@@ -32,3 +42,13 @@ document.getElementById("news-wrapper").addEventListener("click", (e) => {
 document
   .querySelector("button")
   .addEventListener("click", () => window.showRssForm());
+
+// Auto Render
+window.addEventListener("storage", () => {
+  const currentFeeds = getRssFeedUrls();
+  if (currentFeeds.length > urlFeeds.length) {
+    const newFeed = currentFeeds.length[currentFeeds.length - 1];
+    urlFeeds.push(newFeed);
+    getRssFeed(newFeed);
+  }
+});
