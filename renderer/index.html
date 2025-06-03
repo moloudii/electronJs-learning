@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSS Reader</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>آخرین خبرها</h1>
+            <button class="btn btn-info">منابع خبری</button>
+        </div>
+        <div>
+            <ul id="news-wrapper"></ul>
+        </div>
+    </div>
+    <template id="news-card">
+        <div class="card">
+            <a>
+                <div class="card-thumbnail">
+                    <img>
+                </div>
+                <div class="card-body">
+                    <h3></h3>
+                    <p></p>
+                </div>
+            </a>
+        </div>
+    </template>
+
+    <script src="./renderer.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,159 @@
+@font-face {
+  font-family: "Yekan";
+  src: url("./Yekan.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  direction: rtl;
+}
+body {
+  font: 12pt/2 Yekan, sans-serif;
+}
+
+.container {
+  padding: 15px;
+}
+
+a,
+a:hover,
+a:focus,
+a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.card {
+  margin: 20px 0;
+  padding: 4px 12px;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+}
+
+.card a {
+  display: flex;
+  align-items: center;
+}
+
+.card:hover {
+  border: 1px solid #555;
+}
+
+.card .card-body {
+  display: flex;
+  flex-direction: column;
+  padding-right: 15px;
+}
+
+.card .card-body h3 {
+  font-size: 16px;
+  margin: 0 0 8px 0;
+}
+
+.card .card-body p {
+  margin: 0;
+  font-size: 13px;
+}
+
+.card .card-thumbnail {
+  width: 100px;
+}
+
+.card img {
+  width: 100px;
+  /* height: 100%; */
+  border-radius: 5px;
+}
+
+.card:hover {
+  background: #eee;
+  cursor: pointer;
+}
+
+.btn {
+  text-align: center;
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+  color: #fff;
+  text-transform: capitalize;
+  font: 12pt/2 Yekan, sans-serif;
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.btn.btn-info {
+  transition: all 0.2s linear 0s;
+  color: #fff;
+  background-color: #2196f3;
+  border: none;
+}
+
+.btn.btn-info:hover {
+  opacity: 0.7;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e8e8e8;
+  padding-bottom: 12px;
+}
+
+.wrapper-form {
+  margin: 20px 0;
+}
+
+.wrapper-form form {
+  width: 100%;
+  text-align: center;
+}
+
+.wrapper-form form label {
+  width: 100%;
+  display: block;
+  margin: 16px 0;
+}
+
+.wrapper-form form label span:nth-child(1) {
+  background: grey;
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  margin: 0 8px;
+  font-size: 15px;
+}
+
+.wrapper-form form label span:nth-child(2) {
+  min-width: 140px;
+  display: inline-block;
+  font-size: 14px;
+}
+
+.wrapper-form form label input {
+  width: 250px;
+  height: 30px;
+}
+
+.m-4 {
+  margin: 20px 0;
+}
+
+dd {
+  padding-right: 30px;
+}
