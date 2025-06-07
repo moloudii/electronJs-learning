@@ -1,16 +1,8 @@
-// const rssUrl = "https://www.asriran.com/fa/rss/allnews";
-const urlFeeds = JSON.parse(localStorage.getItem("rssFeedUrls")) ?? [];
-urlFeeds.forEach((feed) => {
-  window.rssApi.loadRssFeed(feed.url).then((rssFeedData) => {
-    rssFeedData.items.forEach(addRssItem);
-  });
-});
+import { category } from "../constants/category.js";
 
-// window.loadRssFeed(rssUrl).then((response) => console.log(response));
-// Electron 36
-
+const newsWrapper = document.getElementById("news-wrapper");
+const categoryTitle = document.getElementById("category");
 const addRssItem = (item) => {
-  const newsWrapper = document.getElementById("news-wrapper");
   const template = document.getElementById("news-card");
   const newsCard = template.content.cloneNode(true);
   newsCard.querySelector("a").href = item.link;
@@ -28,7 +20,28 @@ document.getElementById("news-wrapper").addEventListener("click", (e) => {
     window.showFeed(e.target.closest("a").href);
   }
 });
-// New RSS Window (Window)
+
+// Fetch Data From json-server
+const getAllNews = async () => {
+  const all = await window.newsAPI.getAll();
+  newsWrapper.replaceChildren();
+  all.forEach(addRssItem);
+};
+getAllNews();
+
+// Fetch Data By Category
 document
-  .querySelector("button")
-  .addEventListener("click", () => window.showRssForm());
+  .getElementById("category-filter")
+  .addEventListener("click", async (e) => {
+    const cat = +e.target.dataset.category;
+    const list =
+      cat === 0
+        ? await window.newsAPI.getAll()
+        : await window.newsAPI.filterByCategory(cat);
+    newsWrapper.replaceChildren();
+    category.forEach((i) => {
+      i.id === cat ? (categoryTitle.innerHTML = i.name) : null;
+    });
+
+    list.forEach(addRssItem);
+  });
