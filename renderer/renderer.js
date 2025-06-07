@@ -1,26 +1,8 @@
-// const rssUrl = "https://www.asriran.com/fa/rss/allnews";
-// https://www.irna.ir/rss
+import { category } from "../constants/category.js";
 
-// Auto Render
-const getRssFeedUrls = () => {
-  return JSON.parse(localStorage.getItem("rssFeedUrls")) ?? [];
-};
-
-const urlFeeds = getRssFeedUrls();
-const getRssFeed = (feed) => {
-  window.rssApi.loadRssFeed(feed?.url).then((rssFeedData) => {
-    rssFeedData?.items.forEach(addRssItem);
-  });
-};
-urlFeeds.forEach((feed) => {
-  getRssFeed(feed);
-});
-
-// window.loadRssFeed(rssUrl).then((response) => console.log(response));
-// Electron 36
-
+const newsWrapper = document.getElementById("news-wrapper");
+const categoryTitle = document.getElementById("category");
 const addRssItem = (item) => {
-  const newsWrapper = document.getElementById("news-wrapper");
   const template = document.getElementById("news-card");
   const newsCard = template.content.cloneNode(true);
   newsCard.querySelector("a").href = item.link;
@@ -38,17 +20,28 @@ document.getElementById("news-wrapper").addEventListener("click", (e) => {
     window.showFeed(e.target.closest("a").href);
   }
 });
-// New RSS Window (Window)
-document
-  .querySelector("button")
-  .addEventListener("click", () => window.showRssForm());
 
-// Auto Render
-window.addEventListener("storage", () => {
-  const currentFeeds = getRssFeedUrls();
-  if (currentFeeds.length > urlFeeds.length) {
-    const newFeed = currentFeeds.length[currentFeeds.length - 1];
-    urlFeeds.push(newFeed);
-    getRssFeed(newFeed);
-  }
-});
+// Fetch Data From json-server
+const getAllNews = async () => {
+  const all = await window.newsAPI.getAll();
+  newsWrapper.replaceChildren();
+  all.forEach(addRssItem);
+};
+getAllNews();
+
+// Fetch Data By Category
+document
+  .getElementById("category-filter")
+  .addEventListener("click", async (e) => {
+    const cat = +e.target.dataset.category;
+    const list =
+      cat === 0
+        ? await window.newsAPI.getAll()
+        : await window.newsAPI.filterByCategory(cat);
+    newsWrapper.replaceChildren();
+    category.forEach((i) => {
+      i.id === cat ? (categoryTitle.innerHTML = i.name) : null;
+    });
+
+    list.forEach(addRssItem);
+  });

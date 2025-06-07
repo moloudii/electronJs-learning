@@ -11,8 +11,13 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>آخرین خبرها</h1>
-            <button class="btn btn-info">منابع خبری</button>
+            <h1 id="category">آخرین خبرها</h1>
+            <div id="category-filter">
+                <button class="btn btn-info" data-category="0">همه</button>
+                <button class="btn btn-info" data-category="1">ورزشی</button>
+                <button class="btn btn-info" data-category="2">اقتصادی</button>
+                <button class="btn btn-info" data-category="3">سیاسی</button>
+            </div>
         </div>
         <div>
             <ul id="news-wrapper"></ul>
@@ -32,7 +37,7 @@
         </div>
     </template>
 
-    <script src="./renderer.js"></script>
+    <script type="module" src="./renderer.js"></script>
 </body>
 
 </html>

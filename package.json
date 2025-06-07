@@ -5,7 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "api": "npx json-server --watch database/news.json --port 5151"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +17,7 @@
   },
   "dependencies": {
     "electron-reload": "^2.0.0-alpha.1",
+    "json-server": "^1.0.0-beta.3",
     "rss-parser": "^3.13.0"
   },
   "build": {
